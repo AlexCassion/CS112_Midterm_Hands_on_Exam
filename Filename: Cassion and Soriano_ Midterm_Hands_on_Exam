@@ -1,0 +1,55 @@
+ #This is where we randomize 1 to 99 and were we also randomize the operation
+import random
+
+def question():
+    num1 = random.randint(1, 99)
+    num99 = random.randint(1, 99)
+    operation = random.choice(['+', '-', '*', '/'])
+    return num1, operation, num99
+
+#This where the student will input there answer and we are using except to students that enters a value that cannot be converted to float
+def user():
+    try:
+        answer = float(input("Your answer: "))
+        return answer
+    except ValueError:
+        print("Please enter a number.")
+        return user()
+
+
+#This is where the program calculates your answer if its correct or not
+def check(num1, operation, num99, answer):
+    if operation == '+':
+        correct = num1 + num99
+    elif operation == '-':
+        correct = num1 - num99
+    elif operation == '*':
+        correct = num1 * num99
+    elif operation == '/':
+        correct = num1 / num99
+
+    return correct == answer
+
+#This where it start first you will see it welcome you then, it generates the question then does a loop
+def main():
+    print("Welcome to Math Tutor Program!")
+
+    while True:
+        num1, operation, num99 = question()
+        print(f"What is {num1} {operation} {num99}?")
+
+        answer2 = user()
+
+        if check(num1, operation, num99, answer2):
+            print("Your answer is correct!")
+        else:
+            print("Your answer is Incorrect")
+
+        tryagain = input("Do you want to try another question? (yes/no): ")
+
+        if tryagain != 'yes':
+            print("Goodbye!")
+            break
+
+# To start the program
+main()
